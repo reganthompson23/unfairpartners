@@ -28,6 +28,7 @@ export default function ProductManagement() {
       const { data: productsData, error: productsError } = await supabase
         .from('products')
         .select('*')
+        .order('display_order', { nullsFirst: false })
         .order('name');
 
       if (productsError) throw productsError;
