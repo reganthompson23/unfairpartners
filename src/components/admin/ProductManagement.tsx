@@ -17,6 +17,7 @@ export default function ProductManagement() {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editingProduct, setEditingProduct] = useState<ProductWithVariants | null>(null);
+  const [draggedProductIndex, setDraggedProductIndex] = useState<number | null>(null);
 
   useEffect(() => {
     fetchProducts();
@@ -27,6 +28,7 @@ export default function ProductManagement() {
       const { data: productsData, error: productsError } = await supabase
         .from('products')
         .select('*')
+        .order('display_order', { nullsFirst: false })
         .order('name');
 
       if (productsError) throw productsError;
@@ -104,6 +106,49 @@ export default function ProductManagement() {
     setEditingProduct(null);
   };
 
+  const handleProductDragStart = (index: number) => {
+    setDraggedProductIndex(index);
+  };
+
+  const handleProductDragOver = (e: React.DragEvent, index: number) => {
+    e.preventDefault();
+    if (draggedProductIndex === null || draggedProductIndex === index) return;
+
+    const reorderedProducts = [...products];
+    const draggedProduct = reorderedProducts[draggedProductIndex];
+    reorderedProducts.splice(draggedProductIndex, 1);
+    reorderedProducts.splice(index, 0, draggedProduct);
+
+    setProducts(reorderedProducts);
+    setDraggedProductIndex(index);
+  };
+
+  const handleProductDragEnd = async () => {
+    if (draggedProductIndex === null) return;
+
+    try {
+      const updates = products.map((product, idx) => ({
+        id: product.id,
+        display_order: idx
+      }));
+
+      for (const update of updates) {
+        const { error } = await supabase
+          .from('products')
+          .update({ display_order: update.display_order })
+          .eq('id', update.id);
+
+        if (error) throw error;
+      }
+    } catch (error) {
+      console.error('Error saving product order:', error);
+      alert('Failed to save product order');
+      fetchProducts();
+    } finally {
+      setDraggedProductIndex(null);
+    }
+  };
+
   if (loading) {
     return <div className="text-zinc-400">Loading products...</div>;
   }
@@ -136,13 +181,24 @@ export default function ProductManagement() {
       )}
 
       <div className="space-y-4">
-        {products.map((product) => (
+        {products.map((product, index) => (
           <div
             key={product.id}
-            className="bg-zinc-900 border border-zinc-800 rounded-lg p-6"
+            draggable
+            onDragStart={() => handleProductDragStart(index)}
+            onDragOver={(e) => handleProductDragOver(e, index)}
+            onDragEnd={handleProductDragEnd}
+            className="bg-zinc-900 border border-zinc-800 rounded-lg p-6 cursor-move hover:border-zinc-700 transition-colors"
           >
             <div className="flex justify-between items-start gap-4">
-              <div className="flex-1">
+              <div className="flex items-start gap-3 flex-1">
+                <button
+                  className="p-2 hover:bg-zinc-800 rounded-lg transition-colors cursor-grab active:cursor-grabbing flex-shrink-0"
+                  title="Drag to reorder"
+                >
+                  <GripVertical className="w-5 h-5 text-zinc-500" />
+                </button>
+                <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
                   <h3 className="text-lg font-semibold text-white">
                     {product.name}
@@ -209,6 +265,7 @@ export default function ProductManagement() {
                     </div>
                   </div>
                 )}
+                </div>
               </div>
 
               <div className="flex gap-2">
