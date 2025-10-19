@@ -28,7 +28,6 @@ export default function ProductCatalog() {
         .from('products')
         .select('*')
         .eq('is_available', true)
-        .order('display_order', { nullsFirst: false })
         .order('name');
 
       if (productsError) throw productsError;
