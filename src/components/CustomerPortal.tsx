@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { LogOut, ShoppingBag, User, Package, Shield } from 'lucide-react';
+import { LogOut, ShoppingBag, User, Package, Shield, Info } from 'lucide-react';
 import ProductCatalog from './ProductCatalog';
 import CartSidebar from './CartSidebar';
 import { useCart } from '../contexts/CartContext';
 import OrderHistory from './OrderHistory';
 import AdminDashboard from './admin/AdminDashboard';
 
-type View = 'products' | 'orders' | 'profile';
+type View = 'products' | 'orders' | 'profile' | 'information';
 type Mode = 'customer' | 'admin';
 
 export default function CustomerPortal() {
@@ -35,7 +35,7 @@ export default function CustomerPortal() {
                       : 'text-zinc-400 hover:text-white'
                   }`}
                 >
-                  Products
+                  Ordering
                 </button>
                 <button
                   onClick={() => setCurrentView('orders')}
@@ -46,6 +46,16 @@ export default function CustomerPortal() {
                   }`}
                 >
                   My Orders
+                </button>
+                <button
+                  onClick={() => setCurrentView('information')}
+                  className={`text-sm font-medium transition-colors ${
+                    currentView === 'information'
+                      ? 'text-white'
+                      : 'text-zinc-400 hover:text-white'
+                  }`}
+                >
+                  Information
                 </button>
                 <button
                   onClick={() => setCurrentView('profile')}
@@ -136,6 +146,87 @@ export default function CustomerPortal() {
                   <p className="text-zinc-400">View your previous orders</p>
                 </div>
                 <OrderHistory />
+              </>
+            )}
+
+            {currentView === 'information' && (
+              <>
+                <div className="mb-6">
+                  <h2 className="text-2xl font-bold text-white mb-2">Partner Information</h2>
+                  <p className="text-zinc-400">Important details about our ordering process</p>
+                </div>
+                <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-8 max-w-4xl">
+                  <div className="space-y-8">
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+                        <Package className="w-5 h-5 text-zinc-400" />
+                        Order Receiving
+                      </h3>
+                      <p className="text-zinc-400 leading-relaxed">
+                        Orders are received through our wholesale portal 24/7. Once you submit your order, 
+                        you'll receive an immediate confirmation email with your order number. All orders are 
+                        reviewed by our team to ensure accuracy and inventory availability.
+                      </p>
+                    </div>
+
+                    <div className="border-t border-zinc-800 pt-8">
+                      <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+                        <Info className="w-5 h-5 text-zinc-400" />
+                        Order Processing
+                      </h3>
+                      <p className="text-zinc-400 leading-relaxed">
+                        Orders are typically processed within 1-2 business days. During peak seasons, 
+                        processing times may extend to 3-5 business days. You'll receive updates on your 
+                        order status via email as it moves through our fulfillment process. Priority processing 
+                        may be available for urgent orders - please contact us directly.
+                      </p>
+                    </div>
+
+                    <div className="border-t border-zinc-800 pt-8">
+                      <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+                        <User className="w-5 h-5 text-zinc-400" />
+                        Billing Terms
+                      </h3>
+                      <p className="text-zinc-400 leading-relaxed">
+                        We offer flexible payment terms for approved wholesale partners. Standard payment terms 
+                        are Net 30 from invoice date. All invoices will be sent electronically to your registered 
+                        email address. We accept bank transfers, credit cards, and ACH payments. Early payment 
+                        discounts may be available - please inquire with your account manager.
+                      </p>
+                    </div>
+
+                    <div className="border-t border-zinc-800 pt-8">
+                      <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+                        <ShoppingBag className="w-5 h-5 text-zinc-400" />
+                        Shipping & Delivery
+                      </h3>
+                      <p className="text-zinc-400 leading-relaxed mb-4">
+                        We work with trusted carriers to ensure your products arrive safely and on time. 
+                        Shipping costs are calculated based on order weight, dimensions, and destination. 
+                        Tracking information will be provided once your order ships.
+                      </p>
+                      <div className="bg-zinc-800 rounded-lg p-4 space-y-2">
+                        <p className="text-sm text-zinc-300"><span className="font-semibold">Standard Shipping:</span> 5-7 business days</p>
+                        <p className="text-sm text-zinc-300"><span className="font-semibold">Express Shipping:</span> 2-3 business days</p>
+                        <p className="text-sm text-zinc-300"><span className="font-semibold">Overnight:</span> Next business day (order by 2PM)</p>
+                      </div>
+                    </div>
+
+                    <div className="border-t border-zinc-800 pt-8">
+                      <div className="bg-zinc-800 rounded-lg p-6">
+                        <h4 className="text-white font-semibold mb-2">Need Help?</h4>
+                        <p className="text-zinc-400 text-sm mb-3">
+                          Our wholesale support team is here to assist you with any questions about ordering, 
+                          billing, or shipping.
+                        </p>
+                        <p className="text-zinc-300 text-sm">
+                          <span className="font-semibold">Email:</span> wholesale@unfairscooters.com<br />
+                          <span className="font-semibold">Hours:</span> Monday - Friday, 9AM - 5PM EST
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </>
             )}
 
