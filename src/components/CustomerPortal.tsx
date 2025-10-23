@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { LogOut, ShoppingBag, User, Package, Shield, Info } from 'lucide-react';
+import { LogOut, ShoppingBag, User, Package, Shield } from 'lucide-react';
 import ProductCatalog from './ProductCatalog';
 import CartSidebar from './CartSidebar';
 import { useCart } from '../contexts/CartContext';
