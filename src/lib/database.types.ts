@@ -20,6 +20,7 @@ export interface Database {
           city: string
           state: string
           zip: string
+          country: string
           tax_id: string | null
           status: 'pending' | 'approved' | 'rejected'
           is_admin: boolean
@@ -36,6 +37,7 @@ export interface Database {
           city: string
           state: string
           zip: string
+          country: string
           tax_id?: string | null
           status?: 'pending' | 'approved' | 'rejected'
           is_admin?: boolean
@@ -52,6 +54,7 @@ export interface Database {
           city?: string
           state?: string
           zip?: string
+          country?: string
           tax_id?: string | null
           status?: 'pending' | 'approved' | 'rejected'
           is_admin?: boolean
