@@ -19,6 +19,7 @@ export default function RegisterForm({ onToggleMode }: RegisterFormProps) {
     city: '',
     state: '',
     zip: '',
+    country: '',
     tax_id: '',
   });
   const [error, setError] = useState('');
@@ -180,6 +181,21 @@ export default function RegisterForm({ onToggleMode }: RegisterFormProps) {
                 name="zip"
                 type="text"
                 value={formData.zip}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-600"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="country" className="block text-sm font-medium text-zinc-300 mb-1">
+                Country *
+              </label>
+              <input
+                id="country"
+                name="country"
+                type="text"
+                value={formData.country}
                 onChange={handleChange}
                 required
                 className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-600"

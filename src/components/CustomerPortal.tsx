@@ -133,7 +133,7 @@ export default function CustomerPortal() {
               <>
                 <div className="mb-6">
                   <h2 className="text-2xl font-bold text-white mb-2">FX-1 Range</h2>
-                  <p className="text-zinc-400">Experience our premium wholesale collection, designed for partners who demand excellence</p>
+                  <p className="text-zinc-400">Welcome to the rebirth of Unfair. Our debut FX-1 range is available to order now. All stock is on a first come first serve basis.</p>
                 </div>
                 <ProductCatalog />
               </>
@@ -153,63 +153,44 @@ export default function CustomerPortal() {
               <>
                 <div className="mb-6">
                   <h2 className="text-2xl font-bold text-white mb-2">Partner Information</h2>
-                  <p className="text-zinc-400">Important details about our ordering process</p>
+                  <p className="text-zinc-400">Important details about our partnership and ordering process</p>
                 </div>
                 <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-8 max-w-4xl">
                   <div className="space-y-8">
                     <div>
                       <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
-                        <Package className="w-5 h-5 text-zinc-400" />
-                        Order Receiving
+                        <ShoppingBag className="w-5 h-5 text-zinc-400" />
+                        Inventory
                       </h3>
                       <p className="text-zinc-400 leading-relaxed">
-                        Orders are received through our wholesale portal 24/7. Once you submit your order, 
-                        you'll receive an immediate confirmation email with your order number. All orders are 
-                        reviewed by our team to ensure accuracy and inventory availability.
+                        Our FX-1 range represents a highly anticipated debut collection in limited initial production. 
+                        Each piece is crafted to meet the elevated standards scooter riders have come to expect. 
+                        Due to the limited nature of this first production run, all inventory is allocated on a 
+                        first-come, first-served basis. Your stock allocation is secured the moment you submit your order, 
+                        ensuring you receive priority access to this sought-after range.
                       </p>
                     </div>
 
                     <div className="border-t border-zinc-800 pt-8">
                       <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
-                        <Info className="w-5 h-5 text-zinc-400" />
-                        Order Processing
+                        <Package className="w-5 h-5 text-zinc-400" />
+                        Ordering
                       </h3>
                       <p className="text-zinc-400 leading-relaxed">
-                        Orders are typically processed within 1-2 business days. During peak seasons, 
-                        processing times may extend to 3-5 business days. You'll receive updates on your 
-                        order status via email as it moves through our fulfillment process. Priority processing 
-                        may be available for urgent orders - please contact us directly.
+                       Orders can be submitted through our wholesale portal 24/7. Once your order is placed, our team will calculate shipping costs based on your location and our most cost-effective warehouse to ship from, then prepare your official commercial invoice and send it within the following days for payment before processing.
                       </p>
                     </div>
 
                     <div className="border-t border-zinc-800 pt-8">
                       <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
                         <User className="w-5 h-5 text-zinc-400" />
-                        Billing Terms
+                        Billing
                       </h3>
                       <p className="text-zinc-400 leading-relaxed">
-                        We offer flexible payment terms for approved wholesale partners. Standard payment terms 
-                        are Net 30 from invoice date. All invoices will be sent electronically to your registered 
-                        email address. We accept bank transfers, credit cards, and ACH payments. Early payment 
-                        discounts may be available - please inquire with your account manager.
+                        All orders must be paid in full prior to shipment via direct bank transfer in USD only. 
+                        Your commercial invoice will include the complete order total, calculated shipping costs, and direct transfer details (bank account information). 
+                        Once payment is received and confirmed, your order will be processed and prepared for dispatch.
                       </p>
-                    </div>
-
-                    <div className="border-t border-zinc-800 pt-8">
-                      <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
-                        <ShoppingBag className="w-5 h-5 text-zinc-400" />
-                        Shipping & Delivery
-                      </h3>
-                      <p className="text-zinc-400 leading-relaxed mb-4">
-                        We work with trusted carriers to ensure your products arrive safely and on time. 
-                        Shipping costs are calculated based on order weight, dimensions, and destination. 
-                        Tracking information will be provided once your order ships.
-                      </p>
-                      <div className="bg-zinc-800 rounded-lg p-4 space-y-2">
-                        <p className="text-sm text-zinc-300"><span className="font-semibold">Standard Shipping:</span> 5-7 business days</p>
-                        <p className="text-sm text-zinc-300"><span className="font-semibold">Express Shipping:</span> 2-3 business days</p>
-                        <p className="text-sm text-zinc-300"><span className="font-semibold">Overnight:</span> Next business day (order by 2PM)</p>
-                      </div>
                     </div>
 
                     <div className="border-t border-zinc-800 pt-8">
@@ -220,8 +201,7 @@ export default function CustomerPortal() {
                           billing, or shipping.
                         </p>
                         <p className="text-zinc-300 text-sm">
-                          <span className="font-semibold">Email:</span> wholesale@unfairscooters.com<br />
-                          <span className="font-semibold">Hours:</span> Monday - Friday, 9AM - 5PM EST
+                          <span className="font-semibold">Email:</span> contact@unfairscooters.com
                         </p>
                       </div>
                     </div>
@@ -258,7 +238,8 @@ export default function CustomerPortal() {
                       <label className="block text-sm text-zinc-500 mb-1">Address</label>
                       <p className="text-white font-medium">
                         {profile?.address}<br />
-                        {profile?.city}, {profile?.state} {profile?.zip}
+                        {profile?.city}, {profile?.state} {profile?.zip}<br />
+                        {profile?.country}
                       </p>
                     </div>
                     {profile?.tax_id && (
