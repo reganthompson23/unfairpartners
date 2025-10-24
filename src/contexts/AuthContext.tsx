@@ -101,6 +101,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
 
     if (profileError) throw profileError;
+
+    // Fetch and set the profile immediately so the UI updates
+    const newProfile = await fetchProfile(data.user.id);
+    setProfile(newProfile);
   };
 
   const signOut = async () => {
