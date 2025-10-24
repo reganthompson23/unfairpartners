@@ -5,7 +5,7 @@ export default function PendingApproval() {
   const { signOut, profile } = useAuth();
 
   return (
-    <div className="min-h-screen bg-zinc-950 flex items-center justify-center p-4">
+    <div className="h-screen bg-zinc-950 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-8 shadow-2xl text-center">
           <div className="w-16 h-16 bg-amber-950 rounded-full flex items-center justify-center mx-auto mb-4">
